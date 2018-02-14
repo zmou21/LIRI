@@ -1,37 +1,51 @@
 Spotify: 
- Artist: Ed Sheeran 
- Track Name: Shape of You 
- Album name: Shape of You 
- Spotify URL: https://open.spotify.com/track/0FE9t6xYkqWXU2ahLh6D8X
+ Artist: Bruno Mars & Cardi B &  
+ Track Name: Finesse (Remix) [feat. Cardi B] 
+ Album name: Finesse (Remix) [feat. Cardi B] 
+ Spotify URL: https://open.spotify.com/track/3Vo4wInECJQuz9BIBMOu8i
+Spotify: 
+ Artist: Selena Gomez & Marshmello &  
+ Track Name: Wolves 
+ Album name: Wolves 
+ Spotify URL: https://open.spotify.com/track/0tBbt8CrmxbjRP0pueQkyU
  
  OMDB: 
  
-Title: The Lion King 
+Title: Forrest Gump 
  Year: 1994 
- Plot: Lion cub and future king Simba searches for his identity. His eagerness to please others and penchant for testing his boundaries sometimes gets him into trouble. 
- Actors: Rowan Atkinson, Matthew Broderick, Niketa Calame, Jim Cummings 
- imdb Rating: 8.5 
- Rotten Tomatoes: 92% 
+ Plot: The presidencies of Kennedy and Johnson, Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75. 
+ Actors: Tom Hanks, Rebecca Williams, Sally Field, Michael Conner Humphreys 
+ imdb Rating: 8.8 
+ Rotten Tomatoes: 71% 
  Country: USA 
- Language(s): English, Swahili, Xhosa, Zulu
+ Language(s): English
 
-Date: Wed Feb 14 03:38:10 +0000 2018 
-Message: Test #2
-Date: Wed Feb 14 02:36:50 +0000 2018 
-Message: Test tweet for class! Hope everyone's having an awesome day!
-Date: Wed Apr 16 17:33:28 +0000 2014 
-Message: @RepPeteKing I agree with you. Silence those traitors! #sarcasm #firstamendment
-Date: Thu Jul 25 16:22:26 +0000 2013 
-Message: Appreciating the tweets man! Thanks
-Date: Thu Jul 11 00:04:26 +0000 2013 
-Message: Better story than Twilight - http://t.co/WLGiCepXME
-Date: Sat Jan 19 20:16:00 +0000 2013 
-Message: This is adorable :) - http://t.co/hqldBpbl
-Date: Sat Nov 17 08:48:05 +0000 2012 
-Message: Art - http://t.co/Xj7O5sEa
-Date: Sat Nov 10 23:47:03 +0000 2012 
-Message: Help - http://t.co/pdA90gdm don't know how I never have used these!
-Date: Thu Nov 01 00:29:09 +0000 2012 
-Message: @iamfouads awesome man! Great to hear!
-Date: Thu Oct 25 05:23:03 +0000 2012 
-Message: Read the Fair Tax! It can make a difference in our country!
+ Date: Wed Feb 14 03:38:10 +0000 2018 
+ Message: Test #2 
+
+ Date: Wed Feb 14 02:36:50 +0000 2018 
+ Message: Test tweet for class! Hope everyone's having an awesome day! 
+
+ Date: Wed Apr 16 17:33:28 +0000 2014 
+ Message: @RepPeteKing I agree with you. Silence those traitors! #sarcasm #firstamendment 
+
+ Date: Thu Jul 25 16:22:26 +0000 2013 
+ Message: Appreciating the tweets man! Thanks 
+
+ Date: Thu Jul 11 00:04:26 +0000 2013 
+ Message: Better story than Twilight - http://t.co/WLGiCepXME 
+
+ Date: Sat Jan 19 20:16:00 +0000 2013 
+ Message: This is adorable :) - http://t.co/hqldBpbl 
+
+ Date: Sat Nov 17 08:48:05 +0000 2012 
+ Message: Art - http://t.co/Xj7O5sEa 
+
+ Date: Sat Nov 10 23:47:03 +0000 2012 
+ Message: Help - http://t.co/pdA90gdm don't know how I never have used these! 
+
+ Date: Thu Nov 01 00:29:09 +0000 2012 
+ Message: @iamfouads awesome man! Great to hear! 
+
+ Date: Thu Oct 25 05:23:03 +0000 2012 
+ Message: Read the Fair Tax! It can make a difference in our country! 
