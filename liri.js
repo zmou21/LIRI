@@ -9,8 +9,9 @@ var spotifyKeys = require("./keys.js").spotify;
 var client = new twitter(twitterKeys);
 var spotifyNew = new spotify(spotifyKeys);
 
-var input = process.argv; //global variable that takes in a user's console input
+var fs = require("fs"); //file system setup
 
+var input = process.argv; //global variable that takes in a user's console input
 
 //console.log(client);
 //console.log(spotifyNew);
@@ -25,13 +26,17 @@ if (input[2] === "my-tweets") {
 		if(error) throw error;
 
 		for (var i = 0; i < tweets.length; i++) {
-			
+				
+			fs.appendFile("log.txt", `\nDate: ${tweets[i].created_at} \nMessage: ${tweets[i].text}`, function(error) {
+				if (error) {
+					console.log(error);
+				};
+
+			});	
 			console.log(`\nDate created: ${tweets[i].created_at}`);//date created
 			console.log(`Message: ${tweets[i].text}\n`);  // the tweets 
 			//console.log(response);  // Raw response object. 
-
 		};
-
 	});
 }
 
@@ -56,37 +61,55 @@ if (input[2] === "spotify-this-song") {
 		    return console.log('Error occurred: ' + err);
 		  }
 
-		//consoles out artist(s) name
-		console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
+			//consoles out artist(s) name
+			console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
 
-		//consoles out the album name
-		console.log(`Track name: ${data.tracks.items[0].name}`);
+			//consoles out the track name
+			console.log(`Track name: ${data.tracks.items[0].name}`);
 
-		//consoles out the album name
-		console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+			//consoles out the album name
+			console.log(`Album name: ${data.tracks.items[0].album.name}`); 
 
-		//consoles out the link to the track
-		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+			//consoles out the link to the track
+			console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+
+			fs.appendFile('log.txt', `Spotify: \n Artist: ${data.tracks.items[0].artists[0].name} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
+				function(error) {
+
+				if (error) {
+					console.log(error);
+				};
+
+			});		
 		});
 
-	}else {
+	} else {
 
 		spotifyNew.search({ type:'track', query: "The Sign", limit: 1}, function(err, data) {
 		  if (err) {
 		    return console.log('Error occurred: ' + err);
 		  }
 
-		//consoles out artist(s) name
-		console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); 
+			//consoles out artist(s) name
+			console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); 
 
-		//consoles out the album name
-		console.log(`Track name: ${data.tracks.items[0].name}`);
+			//consoles out the album name
+			console.log(`Track name: ${data.tracks.items[0].name}`);
 
-		//consoles out the album name
-		console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+			//consoles out the album name
+			console.log(`Album name: ${data.tracks.items[0].album.name}`); 
 
-		//consoles out the link to the track
-		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+			//consoles out the link to the track
+			console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+
+			fs.appendFile('log.txt', ` \n Spotify: \n Artist: ${data.tracks.items[0].artists[0].name} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
+				function(error) {
+
+				if (error) {
+					console.log(error);
+				};
+
+			});
 		});
 	};
 };
@@ -113,33 +136,50 @@ if (input[2] === "movie-this") {
 
 	  		if (!error && response.statusCode === 200) {
 
-	  		//title of the movie	
-	    	console.log(`\nTitle: ${JSON.parse(body).Title}`);
+	  		//title of the movie
+	  		var title = `\nTitle: ${JSON.parse(body).Title}`;	
+	    	console.log(title);
 
 	    	//year movie made
-	    	console.log(`Year: ${JSON.parse(body).Year}`);
+	    	var year = `Year: ${JSON.parse(body).Year}`;
+	    	console.log(year);
 
 
 	    	//plot of the movie 
-	    	console.log(`Plot: ${JSON.parse(body).Plot}`);
+	    	var plot = `Plot: ${JSON.parse(body).Plot}`;
+	    	console.log(plot);
 
 	    	
 	    	//actors in the movie
-	    	console.log(`Actors: ${JSON.parse(body).Actors}`);
+	    	var actors = `Actors: ${JSON.parse(body).Actors}`;
+	    	console.log(actors);
 
 
 	    	//imdb rating of the movie
-	    	console.log(`imdb Rating: ${JSON.parse(body).imdbRating}`);
+	    	var imdb = `imdb Rating: ${JSON.parse(body).imdbRating}`
+	    	console.log(imdb);
 
 	    	//rotten tomatoes rating of the movie
-	    	console.log(`Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`);
+	    	var rottenTomatoes = `Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`
+	    	console.log(rottenTomatoes);
 
 	    	//country movie produced in 
-	    	console.log(`Country: ${JSON.parse(body).Country}`);
+	    	var countryProduced = `Country: ${JSON.parse(body).Country}`
+	    	console.log(countryProduced);
 
 
 	    	//languages movie translated in
-	    	console.log(`Language(s): ${JSON.parse(body).Language}`);
+	    	var language = `Language(s): ${JSON.parse(body).Language}`
+	    	console.log(language);
+
+		    	fs.appendFile('log.txt', ` \n OMDB: \n ${title} \n ${year} \n ${plot} \n ${actors} \n ${imdb} \n ${rottenTomatoes} \n ${countryProduced} \n ${language}\n`, 
+					function(error) {
+
+					if (error) {
+						console.log(error);
+					};
+
+				});
 	  		}
 		});
 
@@ -151,43 +191,60 @@ if (input[2] === "movie-this") {
 
 	  		if (!error && response.statusCode === 200) {
 
-	  		//title of the movie	
-	    	console.log(`\nTitle: ${JSON.parse(body).Title}`);
+	  		//title of the movie
+	  		var title = `\nTitle: ${JSON.parse(body).Title}`;	
+	    	console.log(title);
 
 	    	//year movie made
-	    	console.log(`Year: ${JSON.parse(body).Year}`);
+	    	var year = `Year: ${JSON.parse(body).Year}`;
+	    	console.log(year);
 
 
 	    	//plot of the movie 
-	    	console.log(`Plot: ${JSON.parse(body).Plot}`);
+	    	var plot = `Plot: ${JSON.parse(body).Plot}`;
+	    	console.log(plot);
 
 	    	
 	    	//actors in the movie
-	    	console.log(`Actors: ${JSON.parse(body).Actors}`);
+	    	var actors = `Actors: ${JSON.parse(body).Actors}`;
+	    	console.log(actors);
 
 
 	    	//imdb rating of the movie
-	    	console.log(`imdb Rating: ${JSON.parse(body).imdbRating}`);
+	    	var imdb = `imdb Rating: ${JSON.parse(body).imdbRating}`
+	    	console.log(imdb);
 
 	    	//rotten tomatoes rating of the movie
-	    	console.log(`Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`);
+	    	var rottenTomatoes = `Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`
+	    	console.log(rottenTomatoes);
 
 	    	//country movie produced in 
-	    	console.log(`Country: ${JSON.parse(body).Country}`);
+	    	var countryProduced = `Country: ${JSON.parse(body).Country}`
+	    	console.log(countryProduced);
 
 
 	    	//languages movie translated in
-	    	console.log(`Language(s): ${JSON.parse(body).Language}`);
+	    	var language = `Language(s): ${JSON.parse(body).Language}`
+	    	console.log(language);
+
+		    	fs.appendFile('log.txt', ` \n OMDB: \n ${title} \n ${year} \n ${plot} \n ${actors} \n ${imdb} \n ${rottenTomatoes} \n ${countryProduced} \n ${language}\n`, 
+					function(error) {
+
+					if (error) {
+						console.log(error);
+					};
+
+				});
 	  		}
+		
 		});
+	
 	}
 
 };
 
 
 //**************Do what it says!**********************
-
-var fs = require("fs");
 
 if (input[2] === "do-what-it-says") {
 
@@ -216,7 +273,14 @@ if (input[2] === "do-what-it-says") {
 		//consoles out the link to the track
 		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
 
-		// console.log(data.tracks.items[0].artists.name);
+			fs.appendFile('log.txt', ` \n Spotify: \n Artist: ${data.tracks.items[0].artists[0].name} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
+				function(error) {
+
+				if (error) {
+					console.log(error);
+				};
+
+			});
 
 		});
 
