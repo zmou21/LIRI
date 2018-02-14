@@ -27,7 +27,7 @@ if (input[2] === "my-tweets") {
 
 		for (var i = 0; i < tweets.length; i++) {
 				
-			fs.appendFile("log.txt", `\nDate: ${tweets[i].created_at} \nMessage: ${tweets[i].text}`, function(error) {
+			fs.appendFile("log.txt", `\n Date: ${tweets[i].created_at} \n Message: ${tweets[i].text} \n`, function(error) {
 				if (error) {
 					console.log(error);
 				};
@@ -61,19 +61,22 @@ if (input[2] === "spotify-this-song") {
 		    return console.log('Error occurred: ' + err);
 		  }
 
+			var artistNames = data.tracks.items[0].artists;
+
+			//console.log(artistNames);
+
+			var artist = "";
+
+			for (var i = 0; i < artistNames.length; i++) {
+				
+				artist += `${data.tracks.items[0].artists[i].name} & `;
+				//console.log(artist);
+			}
+
 			//consoles out artist(s) name
-			console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
+			console.log(`\n Artist: ${artist} \n Track name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n URL to song: ${data.tracks.items[0].external_urls.spotify}\n`); //set this up as a loop to get all artists' names 
 
-			//consoles out the track name
-			console.log(`Track name: ${data.tracks.items[0].name}`);
-
-			//consoles out the album name
-			console.log(`Album name: ${data.tracks.items[0].album.name}`); 
-
-			//consoles out the link to the track
-			console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
-
-			fs.appendFile('log.txt', `Spotify: \n Artist: ${data.tracks.items[0].artists[0].name} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
+			fs.appendFile('log.txt', `Spotify: \n Artist: ${artist} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
 				function(error) {
 
 				if (error) {
@@ -90,8 +93,20 @@ if (input[2] === "spotify-this-song") {
 		    return console.log('Error occurred: ' + err);
 		  }
 
+			var artistNames = data.tracks.items[0].artists;
+
+			//console.log(artistNames);
+
+			var artist = "";
+
+			for (var i = 0; i < artistNames.length; i++) {
+				
+				artist = data.tracks.items[0].artists[i].name;
+				//console.log(artist);
+			}
+
 			//consoles out artist(s) name
-			console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); 
+			console.log(`\nArtist: ${artist}`); 
 
 			//consoles out the album name
 			console.log(`Track name: ${data.tracks.items[0].name}`);
@@ -102,7 +117,7 @@ if (input[2] === "spotify-this-song") {
 			//consoles out the link to the track
 			console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
 
-			fs.appendFile('log.txt', ` \n Spotify: \n Artist: ${data.tracks.items[0].artists[0].name} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
+			fs.appendFile('log.txt', ` \n Spotify: \n Artist: ${artist} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
 				function(error) {
 
 				if (error) {
@@ -261,19 +276,31 @@ if (input[2] === "do-what-it-says") {
 		    return console.log('Error occurred: ' + err);
 		  }
 
-		//consoles out artist(s) name
-		console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
+		  	var artistNames = data.tracks.items[0].artists;
 
-		//consoles out the album name
-		console.log(`Track name: ${data.tracks.items[0].name}`);
+			//console.log(artistNames);
 
-		//consoles out the album name
-		console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+			var artist = "";
 
-		//consoles out the link to the track
-		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+			for (var i = 0; i < artistNames.length; i++) {
+				
+				artist = data.tracks.items[0].artists[i].name;
+				//console.log(artist);
+			}
 
-			fs.appendFile('log.txt', ` \n Spotify: \n Artist: ${data.tracks.items[0].artists[0].name} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
+			//consoles out artist(s) name
+			console.log(`\nArtist: ${artist}`); //set this up as a loop to get all artists' names 
+
+			//consoles out the album name
+			console.log(`Track name: ${data.tracks.items[0].name}`);
+
+			//consoles out the album name
+			console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+
+			//consoles out the link to the track
+			console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+
+			fs.appendFile('log.txt', ` \n Spotify: \n Artist: ${artist} \n Track Name: ${data.tracks.items[0].name} \n Album name: ${data.tracks.items[0].album.name} \n Spotify URL: ${data.tracks.items[0].external_urls.spotify}\n`, 
 				function(error) {
 
 				if (error) {
