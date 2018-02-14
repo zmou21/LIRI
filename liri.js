@@ -136,4 +136,44 @@ if (input[2] === "movie-this") {
     	console.log(`Language(s): ${JSON.parse(body).Language}`);
   		}
 	});
-}
+};
+
+
+//**************Do what it says!**********************
+
+var fs = require("fs");
+
+if (input[2] === "do-what-it-says") {
+
+	fs.readFile("random.txt", "utf8", function(error,data){
+
+		if (error) {
+			console.log(error);
+		};
+
+		//console.log(data);
+
+		spotifyNew.search({ type:'track', query: data, limit: 1}, function(err, data) {
+		  if (err) {
+		    return console.log('Error occurred: ' + err);
+		  }
+
+		//consoles out artist(s) name
+		console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
+
+		//consoles out the album name
+		console.log(`Track name: ${data.tracks.items[0].name}`);
+
+		//consoles out the album name
+		console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+
+		//consoles out the link to the track
+		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+
+		// console.log(data.tracks.items[0].artists.name);
+
+		});
+
+	});	
+
+};
