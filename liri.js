@@ -9,13 +9,15 @@ var spotifyKeys = require("./keys.js").spotify;
 var client = new twitter(twitterKeys);
 var spotifyNew = new spotify(spotifyKeys);
 
+var input = process.argv; //global variable that takes in a user's console input
+
 
 //console.log(client);
 //console.log(spotifyNew);
 
-var params = {screen_name: 'nodejs'};
+//**************Twitter**********************
 
-var input = process.argv;
+var params = {screen_name: 'nodejs'};
 
 if (input[2] === "my-tweets") {
 
@@ -23,11 +25,13 @@ if (input[2] === "my-tweets") {
 		if(error) throw error;
 
 		console.log(`Date created: ${tweets[0].created_at}`);//date created
-		console.log(`Message: ${tweets[0].text}`);  // The favorites. 
+		console.log(`Message: ${tweets[0].text}`);  // the tweets 
 		//console.log(response);  // Raw response object. 
 	});
 }
 
+
+//**************Spotify**********************
 
 if (input[2] === "spotify-this-song") {
 	// console.log("it worked");
@@ -39,7 +43,6 @@ if (input[2] === "spotify-this-song") {
 	for (var i = 3; i < input.length; i++) {
 		track += ` ${input[i]}`		
 	};
-
 	
 	spotifyNew.search({ type:'track', query: track, limit: 1}, function(err, data) {
 	  if (err) {
@@ -47,7 +50,7 @@ if (input[2] === "spotify-this-song") {
 	  }
 
 	//consoles out artist(s) name
-	console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); 
+	console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
 
 	//consoles out the album name
 	console.log(`Track name: ${data.tracks.items[0].name}`);
@@ -60,12 +63,77 @@ if (input[2] === "spotify-this-song") {
 
 	// console.log(data.tracks.items[0].artists.name);
 
-	});
+	})
+
+	if (track ==  null) {
+
+		spotifyNew.search({ type:'track', query: "The Sign", limit: 1}, function(err, data) {
+		  if (err) {
+		    return console.log('Error occurred: ' + err);
+		  }
+
+		//consoles out artist(s) name
+		console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); 
+
+		//consoles out the album name
+		console.log(`Track name: ${data.tracks.items[0].name}`);
+
+		//consoles out the album name
+		console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+
+		//consoles out the link to the track
+		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+		});
+	}
 }
 
 
+//**************OMDB**********************
+
+var request = require("request");
+
+if (input[2] === "movie-this") {
+
+	var movieName = "";
+
+	for (var i = 3; i < input.length; i++) {
+		movieName += `${input[i]}+`
+	}
+	//console.log(movieName);
+
+	var queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
+
+	request(queryURL, function(error, response, body) {
+
+  		if (!error && response.statusCode === 200) {
+
+  		//title of the movie	
+    	console.log(`\nTitle: ${JSON.parse(body).Title}`);
+
+    	//year movie made
+    	console.log(`Year: ${JSON.parse(body).Year}`);
 
 
+    	//plot of the movie 
+    	console.log(`Plot: ${JSON.parse(body).Plot}`);
+
+    	
+    	//actors in the movie
+    	console.log(`Actors: ${JSON.parse(body).Actors}`);
 
 
-//console.log(client);
+    	//imdb rating of the movie
+    	console.log(`imdb Rating: ${JSON.parse(body).imdbRating}`);
+
+    	//rotten tomatoes rating of the movie
+    	console.log(`Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`);
+
+    	//country movie produced in 
+    	console.log(`Country: ${JSON.parse(body).Country}`);
+
+
+    	//languages movie translated in
+    	console.log(`Language(s): ${JSON.parse(body).Language}`);
+  		}
+	});
+}
