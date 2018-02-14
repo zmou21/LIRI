@@ -24,9 +24,14 @@ if (input[2] === "my-tweets") {
 	client.get('statuses/user_timeline', function(error, tweets, response) {
 		if(error) throw error;
 
-		console.log(`Date created: ${tweets[0].created_at}`);//date created
-		console.log(`Message: ${tweets[0].text}`);  // the tweets 
-		//console.log(response);  // Raw response object. 
+		for (var i = 0; i < tweets.length; i++) {
+			
+			console.log(`\nDate created: ${tweets[i].created_at}`);//date created
+			console.log(`Message: ${tweets[i].text}\n`);  // the tweets 
+			//console.log(response);  // Raw response object. 
+
+		};
+
 	});
 }
 
@@ -44,28 +49,27 @@ if (input[2] === "spotify-this-song") {
 		track += ` ${input[i]}`		
 	};
 	
-	spotifyNew.search({ type:'track', query: track, limit: 1}, function(err, data) {
-	  if (err) {
-	    return console.log('Error occurred: ' + err);
-	  }
+	if (track) {
 
-	//consoles out artist(s) name
-	console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
+		spotifyNew.search({ type:'track', query: track, limit: 1}, function(err, data) {
+		  if (err) {
+		    return console.log('Error occurred: ' + err);
+		  }
 
-	//consoles out the album name
-	console.log(`Track name: ${data.tracks.items[0].name}`);
+		//consoles out artist(s) name
+		console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); //set this up as a loop to get all artists' names 
 
-	//consoles out the album name
-	console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+		//consoles out the album name
+		console.log(`Track name: ${data.tracks.items[0].name}`);
 
-	//consoles out the link to the track
-	console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+		//consoles out the album name
+		console.log(`Album name: ${data.tracks.items[0].album.name}`); 
 
-	// console.log(data.tracks.items[0].artists.name);
+		//consoles out the link to the track
+		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+		});
 
-	})
-
-	if (track ==  null) {
+	}else {
 
 		spotifyNew.search({ type:'track', query: "The Sign", limit: 1}, function(err, data) {
 		  if (err) {
@@ -84,8 +88,8 @@ if (input[2] === "spotify-this-song") {
 		//consoles out the link to the track
 		console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
 		});
-	}
-}
+	};
+};
 
 
 //**************OMDB**********************
@@ -101,41 +105,83 @@ if (input[2] === "movie-this") {
 	}
 	//console.log(movieName);
 
-	var queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
+	if (movieName) {
 
-	request(queryURL, function(error, response, body) {
+		var queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
 
-  		if (!error && response.statusCode === 200) {
+		request(queryURL, function(error, response, body) {
 
-  		//title of the movie	
-    	console.log(`\nTitle: ${JSON.parse(body).Title}`);
+	  		if (!error && response.statusCode === 200) {
 
-    	//year movie made
-    	console.log(`Year: ${JSON.parse(body).Year}`);
+	  		//title of the movie	
+	    	console.log(`\nTitle: ${JSON.parse(body).Title}`);
 
-
-    	//plot of the movie 
-    	console.log(`Plot: ${JSON.parse(body).Plot}`);
-
-    	
-    	//actors in the movie
-    	console.log(`Actors: ${JSON.parse(body).Actors}`);
+	    	//year movie made
+	    	console.log(`Year: ${JSON.parse(body).Year}`);
 
 
-    	//imdb rating of the movie
-    	console.log(`imdb Rating: ${JSON.parse(body).imdbRating}`);
+	    	//plot of the movie 
+	    	console.log(`Plot: ${JSON.parse(body).Plot}`);
 
-    	//rotten tomatoes rating of the movie
-    	console.log(`Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`);
-
-    	//country movie produced in 
-    	console.log(`Country: ${JSON.parse(body).Country}`);
+	    	
+	    	//actors in the movie
+	    	console.log(`Actors: ${JSON.parse(body).Actors}`);
 
 
-    	//languages movie translated in
-    	console.log(`Language(s): ${JSON.parse(body).Language}`);
-  		}
-	});
+	    	//imdb rating of the movie
+	    	console.log(`imdb Rating: ${JSON.parse(body).imdbRating}`);
+
+	    	//rotten tomatoes rating of the movie
+	    	console.log(`Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`);
+
+	    	//country movie produced in 
+	    	console.log(`Country: ${JSON.parse(body).Country}`);
+
+
+	    	//languages movie translated in
+	    	console.log(`Language(s): ${JSON.parse(body).Language}`);
+	  		}
+		});
+
+	} else {
+
+		var queryURL = "http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy"
+
+		request(queryURL, function(error, response, body) {
+
+	  		if (!error && response.statusCode === 200) {
+
+	  		//title of the movie	
+	    	console.log(`\nTitle: ${JSON.parse(body).Title}`);
+
+	    	//year movie made
+	    	console.log(`Year: ${JSON.parse(body).Year}`);
+
+
+	    	//plot of the movie 
+	    	console.log(`Plot: ${JSON.parse(body).Plot}`);
+
+	    	
+	    	//actors in the movie
+	    	console.log(`Actors: ${JSON.parse(body).Actors}`);
+
+
+	    	//imdb rating of the movie
+	    	console.log(`imdb Rating: ${JSON.parse(body).imdbRating}`);
+
+	    	//rotten tomatoes rating of the movie
+	    	console.log(`Rotten Tomatoes: ${JSON.parse(body).Ratings[1].Value}`);
+
+	    	//country movie produced in 
+	    	console.log(`Country: ${JSON.parse(body).Country}`);
+
+
+	    	//languages movie translated in
+	    	console.log(`Language(s): ${JSON.parse(body).Language}`);
+	  		}
+		});
+	}
+
 };
 
 
