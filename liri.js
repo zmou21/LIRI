@@ -40,14 +40,26 @@ if (input[2] === "spotify-this-song") {
 		track += ` ${input[i]}`		
 	};
 
-	console.log(track);
 	
 	spotifyNew.search({ type:'track', query: track, limit: 1}, function(err, data) {
 	  if (err) {
 	    return console.log('Error occurred: ' + err);
 	  }
-	 
-	console.log(JSON.stringify(data,null, 2)); 
+
+	//consoles out artist(s) name
+	console.log(`\nArtist: ${data.tracks.items[0].artists[0].name}`); 
+
+	//consoles out the album name
+	console.log(`Track name: ${data.tracks.items[0].name}`);
+
+	//consoles out the album name
+	console.log(`Album name: ${data.tracks.items[0].album.name}`); 
+
+	//consoles out the link to the track
+	console.log(`URL to song: ${data.tracks.items[0].external_urls.spotify}\n`);
+
+	// console.log(data.tracks.items[0].artists.name);
+
 	});
 }
 
